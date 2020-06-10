@@ -1,0 +1,58 @@
+pipeline {
+	agent any
+	
+	environment {
+
+	  	GITHUB_ORGANIZATION = "platform9"	
+      GITHUB_REPO = "KoolKubernetes"
+	  	//DOCKERHUB_REGISTRY = "pf9sys/webapp01" This is no more required as it is declared in Jenkins as env. variable
+      REPOSITORY_TAG="${DOCKERHUB_REGISTRY}:${env.BUILD_ID}"
+      APP_PATH="cicd/jenkins/webapp01"
+ 	}
+    
+    stages {
+      
+    	stage ('PREPARATION') {
+        	steps {
+      
+          		cleanWs()
+          		// git credentialsId: 'GitHub', url: "https://github.com/${GITHUB_ORGANIZATION}/${GITHUB_REPO}"
+              git url: "https://github.com/${GITHUB_ORGANIZATION}/${GITHUB_REPO}"
+	        }
+	    }
+
+
+      stage ('BUILD') {
+        	steps {
+             sh 'npm install --prefix ${WORKSPACE}/${APP_PATH}'
+             echo 'Hello'
+
+        	}
+      }	
+
+      stage ('PUBLISH') {
+        	environment {
+              // make sure below credential is stored in Jenkins global credentials.
+            	registryCredential = 'dockerhub'
+          	}
+          	steps {
+
+               	 	script {
+                    	def appimage = docker.build ("${DOCKERHUB_REGISTRY}:${env.BUILD_ID}", "--network host ${WORKSPACE}/${APP_PATH}")
+                         	docker.withRegistry( '', registryCredential ) {
+                        	appimage.push()
+                        	appimage.push('latest')
+                    	}
+              	  	}
+
+          	}
+
+      }
+
+      stage ('DEPLOY') {
+         	steps {
+             sh 'envsubst < ${WORKSPACE}/${APP_PATH}/k8s/app.yaml | kubectl apply -f -'
+        	}
+        }
+      }
+}
