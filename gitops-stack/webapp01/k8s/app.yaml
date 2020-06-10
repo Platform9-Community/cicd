@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: platform9-webapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app:  platform9-webapp
+  template:
+    metadata:
+      labels:
+        app:  platform9-webapp
+        version: 0.9.0
+    spec:
+      containers:
+        - name: platform9-webapp
+          # image: repo_account/repo_name  
+          image: stevenduckaert/koolkubernetes
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+      restartPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  platform9-webapp
+spec:
+  type: LoadBalancer
+  selector:
+    app:  platform9-webapp
+  ports:
+   - port: 80
+     targetPort: 80
