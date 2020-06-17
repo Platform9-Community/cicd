@@ -16,7 +16,7 @@ $ kubectl label nodes <node-name> jenkins=allow
 Now clone the Kool Kubernetes repository on any machine from where the kubectl can deploy json manifests to your kubernetes cluster.
 
 ```bash
-$ git clone https://github.com/KoolKubernetes/cicd
+$ git clone https://github.com/KoolKubernetes/cicd.git
 ```
 Deploy Jenkins using kubectl
 ```bash
