@@ -3,7 +3,7 @@
 Jenkins is a well known, widely adopted Continuous Integration platform in enterprises. 
 
 ## Deployment of Jenkins on one of your Platform9 Managed Kubernetes clusters
-Here we are going to deploy Jenkins on top of platform9 managed kubernetes freedom tier. The Jenkins docker image provided here has Openjdk8, Maven, Go and NodeJS preinstalled with commonly used plugins. It can be further customized once Jenkins is up and running. Ensure that bare metal cluster has metallb load-balancer pre configured before deploying jenkins. It is also required for exposing the NodeJS that will get deployed with Jenkins pipeline.
+Here we are going to deploy Jenkins on top of platform9 managed kubernetes freedom tier. The Jenkins docker image provided here has Openjdk8, Maven, Go and NodeJS preinstalled with commonly used plugins. It can be further customized once Jenkins is up and running. Ensure that bare metal cluster has metallb load-balancer pre configured before deploying jenkins. It is also required for exposing the NodeJS app that will get deployed with Jenkins pipeline at the end.
 
 ## Jenkins configuration
 Before deploying Jenkins label one node with a specific key value pair so that Jenkins pod gets scheduled on this node. 
