@@ -3,11 +3,12 @@ pipeline {
 	
 	environment {
 
-	  	GITHUB_ORGANIZATION = "platform9"	
-      GITHUB_REPO = "KoolKubernetes"
+	  	GITHUB_ORGANIZATION = "KoolKubernetes"	
+      GITHUB_REPO = "cicd"
 	  	//DOCKERHUB_REGISTRY = "pf9sys/webapp01" This is no more required as it is declared in Jenkins as env. variable
       REPOSITORY_TAG="${DOCKERHUB_REGISTRY}:${env.BUILD_ID}"
-      APP_PATH="cicd/jenkins/webapp01"
+      //APP_PATH="cicd/jenkins/webapp01"
+      APP_PATH="jenkins/webapp01"
  	}
     
     stages {
@@ -25,8 +26,7 @@ pipeline {
       stage ('BUILD') {
         	steps {
              sh 'npm install --prefix ${WORKSPACE}/${APP_PATH}'
-             echo 'Hello'
-
+             
         	}
       }	
 
