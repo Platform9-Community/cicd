@@ -16,7 +16,6 @@ spec:
       containers:
         - name: platform9-webapp
           # image: repo_account/repo_name  
-          image: stevenduckaert/cicd
           imagePullPolicy: Always
           ports:
             - containerPort: 80
