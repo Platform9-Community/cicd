@@ -9,11 +9,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-<<<<<<< HEAD
-          Howdie Peter
-=======
-          Howdie everyone!
->>>>>>> 60a4f7241031a7cfea10bcd2e0f0fe65049a9098
+          Howdie PF9
         </p>
         <a
           className="App-link"
