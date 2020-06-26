@@ -9,7 +9,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Howdie PF9
+          Howdie PF9.
         </p>
         <a
           className="App-link"
