@@ -1,0 +1,61 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: p9-react-app
+  labels:
+    app: p9-react-app
+---
+#apiVersion: extensions/v1beta1
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: p9-react-app
+  namespace: p9-react-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: p9-react-app
+  template:
+    metadata:
+      labels:
+        app: p9-react-app
+        version: 0.6.0
+    spec:
+      containers:
+        - name: p9-react-app
+          image: pf9sys/webapp01:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+      restartPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: p9-react-app
+  namespace: p9-react-app
+spec:
+  type: ClusterIP
+  selector:
+    app: p9-react-app
+  ports:
+   - port: 80
+     targetPort: 80
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: pf9app-routing
+  namespace: p9-react-app
+spec:
+  rules:
+    - host: pf9app.platform9.horse
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: p9-react-app
+            servicePort: 80
+...
