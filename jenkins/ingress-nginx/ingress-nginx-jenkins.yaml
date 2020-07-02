@@ -1,0 +1,32 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: jenkins-routing
+spec:
+  rules:
+    - host: jenkins.platform9.horse
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: jenkins
+            servicePort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins
+  namespace: default
+spec:
+  type: ClusterIP
+  ports:
+    - name: ui
+      port: 8080
+      targetPort: 8080
+    - name: jnlp
+      port: 50000
+      targetPort: 50000
+  selector:
+    app: jenkins
+...

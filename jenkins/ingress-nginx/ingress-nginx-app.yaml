@@ -1,0 +1,27 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: pf9app-routing
+spec:
+  rules:
+    - host: pf9app.platform9.horse
+      http:
+        paths:
+        - path: /
+          backend:
+            serviceName: p9-react-app
+            servicePort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: p9-react-app
+spec:
+  type: ClusterIP
+  selector:
+    app: p9-react-app
+  ports:
+   - port: 80
+     targetPort: 80
+...
