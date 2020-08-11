@@ -8,7 +8,7 @@
   </a>
 </p>
 
-> This is a collection of Kubernetes CD/CD yaml files that are tested to work with Platform9 Free Tier Kubernetes
+> This is a collection of Kubernetes CI/CD yaml files that are tested to work with Platform9 Free Tier Kubernetes
 
 ## Author
 
