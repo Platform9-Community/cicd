@@ -30,5 +30,5 @@ RUN bash nodesource_setup.sh
 RUN apt-get install -y nodejs
 
 # Install Kubectl
-RUN  wget https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/linux/amd64/kubectl && chmod +x ./kubectl && \
-mv ./kubectl /usr/local/bin/kubectl
+RUN  wget https://storage.googleapis.com/kubernetes-release/release/$(curl -s \
+https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
