@@ -1,3 +1,5 @@
+> **Archive Notice:** This repository is no longer maintained.
+
 <h1 align="center">Welcome to KoolKubernetes CI/CD 👋</h1>
 <p>
   <a href="https://www.npmjs.com/package/cicd" target="_blank">
